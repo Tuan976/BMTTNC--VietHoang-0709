@@ -5,7 +5,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(current_dir)
 sys.path.append(os.path.join(current_dir, "cipher", "Rail Fence"))
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from cipher.caesar.caesar_cipher import CaesarCipher
 from cipher.Vigenere.vigenere_cipher import VigenereCipher
 from railfence_cipher import RailFenceCipher
@@ -19,6 +19,10 @@ vigenere_cipher = VigenereCipher()
 railfence_cipher = RailFenceCipher()
 playfair_cipher = PlayFairCipher()
 transposition_cipher = TranspositionCipher()
+
+@app.route("/")
+def index():
+    return render_template("index.html")
 
 @app.route("/api/caesar/encrypt", methods=["POST"])
 def caesar_encrypt():
